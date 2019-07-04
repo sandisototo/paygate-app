@@ -1,0 +1,1 @@
+<?php abstract class BaseAnswer { abstract public function answer(); }

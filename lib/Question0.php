@@ -1,0 +1,1 @@
+<?php include_once('BaseQuestion.php');class Question0 extends BaseQuestion {public function getData() {return 'Hello World!!!';}public function getInstructions() {return include_once('questions/Q0.php');}}

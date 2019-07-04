@@ -1,0 +1,1 @@
+<?php include_once('lib/Question6.php');$post = $_POST;$q5 = new Question6();echo $q5->getHttpResponse($post);die();
