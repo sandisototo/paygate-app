@@ -3,6 +3,7 @@
     include_once('lib/BaseAnswer.php');
 
     class Answer2 extends BaseAnswer {
+        private $zar_currency_rate = 0;
         public function answer() {
             $q2 = new Question2();
 
@@ -13,11 +14,33 @@
             $data = $q2->getData();
 
             foreach ($data as $element) {
-                //todo: remove after answering
-                print_r($element);
-                echo '<br/>';
-
                 //todo: your answer logic here
+                $amount = (float)$this->getAmount($element);
+                $currency = (string)trim($this->getCurrency($element));
+            
+                $rate = $q2->getZARConversionRate($currency);
+                $converted_amount = $this->convert($amount, $currency, $rate);
+                $this->displayConversion($currency, $rate, $converted_amount);
             }
+        }
+
+        private function getAmount($element) {
+            return explode(' ', $element )[1];
+        }
+
+        private function getCurrency($element) {
+            return array_pop(explode('>', $element));
+        }
+
+        private function convert($amount, $currency, $rate) {
+            $converted_amount = (float)$amount * $rate;
+            return number_format($converted_amount, 2);
+        }
+        
+        private function displayConversion($currency, $rate, $converted_amount) {  
+            echo '  Currency='.$currency;
+            echo '  | Rate='.$rate;
+            echo '  | Converted amount= R '.$converted_amount;
+            echo '<br/>'; 
         }
     }
