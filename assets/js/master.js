@@ -5,14 +5,28 @@ $(document).ready(function () {
     */
     /* Start All Your jquery*/
     /*==================================================================*/
+    $('#btnDone').on('click', (e) => {
+        let url = $('#actionInput').attr('url');
+        let action = $('#actionInput').attr('action');
 
+        $.ajax
+        ({ 
+            url,
+            data: { action },
+            type: 'post',
+            success: function(result)
+            {
+                alert(result);
+            }
+        });
+    });
 
     /*==================================================================*/
     /*End of jquery*/
 
     /*==================================================================*/
     /* Example Answer (Do not remove)*/
-    alert($('#exampleData').val());
+    // alert($('#exampleData').val());
 });
 
 /*

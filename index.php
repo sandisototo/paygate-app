@@ -30,11 +30,45 @@
         //setting up data
         $q6->setup($connection);
 
-
+        print_r($q6->getData());
+        $url = $q6->getData();
         //Answer invocation to question 6
         //==================================================================================================================
-        //todo: invoke your mvc answer to questions 6
-        //todo: you can use whatever method to implement the invocation of your answer
+        ini_set('display_errors', true);
+        include_once("answers/src/controllers/employee-controller.php");
+        $empController = new EmployeeController();
+        $emps = $empController->get($connection);
+
+        echo '<table id="tbId" class="tdCl" style="width:100%">
+             <thead>
+              <tr>
+                <th>Emp ID</th>
+                <th>Employee</th> 
+                <th>Occupationge</th>
+                <th>Project</th>
+                <th>Description</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>';
+            foreach ($emps as $emp) {
+                echo '
+                <tr>
+                    <td>'.$emp["EMP_ID"].'</td>
+                    <td>'.$emp["EMP_NAME"].' '.$emp["EMP_SURNAME"].'</td>
+                    <td>'.$emp["EMP_TITLE"].'</td>
+                    <td>'.$emp["ID"].' '.$emp["TITLE"].'</td>
+                    <td>'.$emp["DESCRIPTION"].'</td>
+                    <td>'.$emp["STATE"].'</td>
+                </tr>';
+
+            }
+        echo '</tbody>
+            </table>';
+
+        echo '<div class="footer"><center><p>footer...</p></center></div>';
+        echo '<input id="actionInput" type="hidden" action="done" url="'.$url.'">';
+        echo '<button id="btnDone" type="button" class="btn">Done</button>';
         //End of invocation
         //==================================================================================================================
     } else if ($qNo == 99) {
@@ -42,3 +76,5 @@
     } else {
         die('Unknown Question Number');
     }
+
+    echo '<script type="text/javascript" src="assets/js/master.js"></script>';
