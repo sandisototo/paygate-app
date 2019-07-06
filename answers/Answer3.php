@@ -9,12 +9,34 @@
             //todo: comment out after answering
             $q3->getInstructions();
 
-            for($i = 0; $i < 6; $i++) {
-                //Data to work with
-                $q3->getData();
+            // Side note: Parse and Fatal errors are not recoverable.
+            register_shutdown_function('Answer3::shutdown');
+            set_error_handler('Answer3::handler');
 
-                //todo: your answer logic here
-                //todo: make sure no errors are displayed on screen
+            for($i = 0; $i < 6; $i++) {
+                try {
+                    $q3->getData();
+                    echo '<br/><br/>';
+                }
+                catch (Exception $ex) {
+                   echo 'Handled exception:: ERROR:'.$ex.getMessage();
+                }
+
+                $this->shutdown();
             }
+        }
+
+        public function shutdown() {
+           // Get error
+           $error = error_get_last();
+           if(isset($error)) {
+                // Invoke error handler
+                static::handler($error['type'], $error['message'], $error['file'], $error['line']);
+           }
+        }
+
+        public static function handler($type, $message, $file, $line) {
+            // Custom message
+            echo 'Handled core:: Error in file: '.$file.' at line '.$line.' with type error: '.$type.' and message: '.$message;
         }
     }
