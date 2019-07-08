@@ -57,7 +57,7 @@
                 $result = file_get_contents($url, false, $context);
                 return $result;
             } catch (exception $ex) {
-                echo 'ERROR while making a '.$action.' request::'.$ex.getMessage();
+                return 'ERROR while making a '.$action.' request::'.$ex->getMessage();
             }
         }
 

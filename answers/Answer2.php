@@ -36,7 +36,7 @@
 
         private function convert($amount, $currency, $rate) {
             $converted_amount = 0;
-            if($currency === 'GBP') {
+            if($currency === 'GBP'  && !empty($this->usd_rate)) {
                 $za_usd =  (float)$amount * $this->usd_rate;
                 $converted_amount = (float)$za_usd * $rate;
             } else {

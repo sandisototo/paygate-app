@@ -19,14 +19,15 @@
                     echo '<br/><br/>';
                 }
                 catch (Exception $ex) {
-                   echo 'Handled exception:: ERROR:'.$ex.getMessage();
+                   echo 'Handled exception:: ERROR:'.$ex->getMessage();
                 }
 
                 $this->shutdown();
             }
         }
 
-        public function shutdown() {
+        // Making sure it's public
+        public static function shutdown() {
            // Get error
            $error = error_get_last();
            if(isset($error)) {
