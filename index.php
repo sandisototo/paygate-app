@@ -44,7 +44,7 @@
               <tr>
                 <th>Emp ID</th>
                 <th>Employee</th> 
-                <th>Occupationge</th>
+                <th>Occupation</th>
                 <th>Project</th>
                 <th>Description</th>
                 <th>State</th>
